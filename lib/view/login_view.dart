@@ -12,6 +12,8 @@ class LoginView extends StatefulWidget {
 var formKey = GlobalKey<FormState>();
 var txtValor1 = TextEditingController();
 var txtValor2 = TextEditingController();
+String txtSenha="a0";
+
 
 class _LoginViewState extends State<LoginView> {
   @override
@@ -45,24 +47,24 @@ class _LoginViewState extends State<LoginView> {
               ),
               SizedBox(height: 30),
               TextFormField(
-                controller: txtValor2,
-                style: TextStyle(fontSize: 32),
-                decoration: InputDecoration(
-                  labelText: 'senha',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.key),
-                ),
-                validator: (value) {
-                  if (value == null) {
-                    return 'digite a senha';
-                  } else if (value.isEmpty) {
-                    return 'digite a senha';
-                  } else if (double.tryParse(value) == null) {
-                    return 'digite uma senha válida';
+                  controller: txtValor2,
+                  style: TextStyle(fontSize: 32),
+                  decoration: InputDecoration(
+                    labelText: 'senha',
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.key),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Digite a senha';
+                    } else if (double.tryParse(value) == null) {
+                      return 'Digite uma senha válida';
+                    } else if (value != 1111) {
+                      return 'Senha incorreta';
+                    }
+                    return null;
                   }
-                  return null;
-                },
-              ),
+                  ),
               SizedBox(height: 30),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -100,6 +102,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, 'cadastro');
+                  final String txtSenha = ModalRoute.of(context)!.settings.arguments as String;
                 },
                 child: Text('Cadastrar Usuário'),
               ),

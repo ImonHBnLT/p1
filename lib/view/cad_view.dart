@@ -12,16 +12,16 @@ class CadView extends StatefulWidget {
 
 var formKey = GlobalKey<FormState>();
 var txtValor1 = TextEditingController();
-String txtSenha="a";
+String txtSenha = "a0";
 
 class _CadViewState extends State<CadView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(50, 100, 50, 100),
-        child: Center(
-          child: Form(
+        body: Padding(
+      padding: EdgeInsets.fromLTRB(50, 100, 50, 100),
+      child: Center(
+        child: Form(
           key: formKey,
           child: Column(
             children: [
@@ -55,13 +55,20 @@ class _CadViewState extends State<CadView> {
                 ),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
+                    txtSenha = generateRandomString();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Senha Gerada com Sucesso!'),
+                        content: Text('Senha Gerada com Sucesso! \n $txtSenha'),
                         duration: Duration(seconds: 3),
+                        action: 
+                          SnackBarAction(
+                            label: 'Voltar para tela inicial',
+                            onPressed: () {
+                             Navigator.pop(context, txtSenha);
+                            },
+                          ),
                       ),
                     );
-                    txtSenha = generateRandomString();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -72,6 +79,7 @@ class _CadViewState extends State<CadView> {
                   }
                 },
                 child: Text('Gerar Senha'),
+              
               ),
               SizedBox(height: 30),
               ElevatedButton(
@@ -90,8 +98,7 @@ class _CadViewState extends State<CadView> {
           ),
         ),
       ),
-        )
-    );
+    ));
   }
 }
 
@@ -103,7 +110,10 @@ bool validateEmail(String email) {
 
 String generateRandomString() {
   final random = Random();
-  final characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#\$%^&*()_+[]{}|;:,.<>?';
-  final randomString = List.generate(6, (index) => characters[random.nextInt(characters.length)]).join();
+  final characters =
+      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#\$%^&*()_+[]{}|;:,.<>?';
+  final randomString =
+      List.generate(6, (index) => characters[random.nextInt(characters.length)])
+          .join();
   return randomString;
 }
