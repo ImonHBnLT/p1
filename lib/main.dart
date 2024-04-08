@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:p1/view/Init.dart';
 import 'package:p1/view/cad_view.dart';
 
 import 'view/login_view.dart';
@@ -26,6 +27,8 @@ class MainApp extends StatelessWidget {
       routes: {
         'login': (context) => LoginView(),
         'cadastro': (context) => CadView(),
+        'inicio' : (context) => Init(),
+        'lista' : (context) => ListView(),
       },
     );
   }

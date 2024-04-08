@@ -110,7 +110,7 @@ bool validateEmail(String email) {
 
 String generateRandomString() {
   final random = Random();
-  final characters =
+  const characters =
       'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#\$%^&*()_+[]{}|;:,.<>?';
   final randomString =
       List.generate(6, (index) => characters[random.nextInt(characters.length)])
