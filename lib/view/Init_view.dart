@@ -9,13 +9,6 @@ class Init extends StatefulWidget {
   State<Init> createState() => _InitState();
 }
 
-class ShoppingList {
-  String name;
-  List<String> items;
-
-  ShoppingList(this.name, this.items);
-}
-
 class _InitState extends State<Init> {
   @override
   Widget build(BuildContext context) {
