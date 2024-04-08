@@ -34,14 +34,10 @@ class _InitState extends State<Init> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _createNewList(); 
+
         },
         child: Icon(Icons.add),
       ),
     );
   }
 }
-
- void _createNewList() {
-
-  }

@@ -107,6 +107,20 @@ class _LoginViewState extends State<LoginView> {
                 },
                 child: Text('Cadastrar Usuário'),
               ),
+              SizedBox(height: 30),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'cadastro');
+                },
+                child: Text('Esqueceu a senha?'),
+              ),
+              SizedBox(height: 30),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'cadastro');
+                },
+                child: Text('Sobre'),
+              ),
             ],
           ),
         ),
