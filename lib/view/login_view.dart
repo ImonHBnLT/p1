@@ -9,10 +9,10 @@ class LoginView extends StatefulWidget {
   State<LoginView> createState() => _LoginViewState();
 }
 
+
 var formKey = GlobalKey<FormState>();
 var txtValor1 = TextEditingController();
 var txtValor2 = TextEditingController();
-
 
 class _LoginViewState extends State<LoginView> {
   @override
@@ -53,18 +53,17 @@ class _LoginViewState extends State<LoginView> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.key),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Digite a senha';
-                  } else if (double.tryParse(value) == null) {
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Digite a senha';
+                } else {
+                  const pattern = r'^[a-zA-Z0-9!@#\$%^&*()_+[\]{}|;:,.<>?]{6}$';
+                  if (!RegExp(pattern).hasMatch(value)) {
                     return 'Digite uma senha válida';
-                  } else {
-                    if (value != validatePassword(value)) {
-                      return 'Senha incorreta';
-                    }
                   }
-                  return null;
-                },
+                }
+                return null;
+              },
               ),
               SizedBox(height: 30),
               ElevatedButton(
@@ -79,7 +78,7 @@ class _LoginViewState extends State<LoginView> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Bem vindo!'),
-                        duration: Duration(seconds: 3),
+                        duration: Duration(seconds: 1),
                       ),
                     );
                     Navigator.pushNamed(context, 'inicio');
@@ -87,7 +86,7 @@ class _LoginViewState extends State<LoginView> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('email ou senha inválidos.'),
-                        duration: Duration(seconds: 3),
+                        duration: Duration(seconds: 1),
                       ),
                     );
                   }
@@ -117,7 +116,7 @@ class _LoginViewState extends State<LoginView> {
               SizedBox(height: 30),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, 'cadastro');
+                  Navigator.pushNamed(context, 'sobre');
                 },
                 child: Text('Sobre'),
               ),
@@ -133,18 +132,4 @@ bool validateEmail(String email) {
   // Regular expression pattern for a valid email address
   const pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
   return RegExp(pattern).hasMatch(email);
-}
-
-bool validatePassword(String password) {
-  const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
-  const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const digits = '0123456789';
-  const specialCharacters = '!@#\$%^&*()_+[]{}|;:,.<>?';
-
-  bool hasLowerCaseLetter = password.split('').any((char) => lowerCaseLetters.contains(char));
-  bool hasUpperCaseLetter = password.split('').any((char) => upperCaseLetters.contains(char));
-  bool hasDigit = password.split('').any((char) => digits.contains(char));
-  bool hasSpecialCharacter = password.split('').any((char) => specialCharacters.contains(char));
-
-  return hasLowerCaseLetter && hasUpperCaseLetter && hasDigit && hasSpecialCharacter;
 }

@@ -14,7 +14,7 @@ class CadView extends StatefulWidget {
 
 var formKey = GlobalKey<FormState>();
 var txtValor1 = TextEditingController();
-String txtSenha = "a0";
+String txtSenha = 'a0';
 
 class _CadViewState extends State<CadView> {
   @override
@@ -67,7 +67,7 @@ class _CadViewState extends State<CadView> {
                           SnackBarAction(
                             label: 'Copiar senha e voltar para tela inicial',
                             onPressed: () {
-                             Navigator.pop(context, txtSenha);
+                             Navigator.pop(context);
                             },
                           ),
                       ),

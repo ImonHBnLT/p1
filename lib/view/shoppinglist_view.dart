@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:p1/view/Init_view.dart';
 
 class ShoppingListView extends StatefulWidget {
   const ShoppingListView({super.key});
@@ -13,9 +14,10 @@ class ShoppingListView extends StatefulWidget {
 class _ShoppingListViewState extends State<ShoppingListView> {
   @override
   Widget build(BuildContext context) {
+    final String listName = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Lista de Compras ${1 + 1}')),
+      appBar: AppBar(title: Text(listName)),
       body: Center(child: Text('Itens da lista de compras aqui')),
     );
   }
