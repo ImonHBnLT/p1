@@ -63,13 +63,12 @@ class _CadViewState extends State<CadView> {
                       SnackBar(
                         content: Text('Senha Gerada com Sucesso! \n $txtSenha'),
                         duration: Duration(seconds: 3),
-                        action: 
-                          SnackBarAction(
-                            label: 'Copiar senha e voltar para tela inicial',
-                            onPressed: () {
-                             Navigator.pop(context);
-                            },
-                          ),
+                        action: SnackBarAction(
+                          label: 'Copiar senha e voltar para tela inicial',
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
                       ),
                     );
                   } else {
@@ -82,7 +81,6 @@ class _CadViewState extends State<CadView> {
                   }
                 },
                 child: Text('Gerar Senha'),
-              
               ),
               SizedBox(height: 30),
               ElevatedButton(

@@ -9,7 +9,6 @@ class LoginView extends StatefulWidget {
   State<LoginView> createState() => _LoginViewState();
 }
 
-
 var formKey = GlobalKey<FormState>();
 var txtValor1 = TextEditingController();
 var txtValor2 = TextEditingController();
@@ -53,17 +52,18 @@ class _LoginViewState extends State<LoginView> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.key),
                 ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Digite a senha';
-                } else {
-                  const pattern = r'^[a-zA-Z0-9!@#\$%^&*()_+[\]{}|;:,.<>?]{6}$';
-                  if (!RegExp(pattern).hasMatch(value)) {
-                    return 'Digite uma senha válida';
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Digite a senha';
+                  } else {
+                    const pattern =
+                        r'^[a-zA-Z0-9!@#\$%^&*()_+[\]{}|;:,.<>?]{6}$';
+                    if (!RegExp(pattern).hasMatch(value)) {
+                      return 'Digite uma senha válida';
+                    }
                   }
-                }
-                return null;
-              },
+                  return null;
+                },
               ),
               SizedBox(height: 30),
               ElevatedButton(

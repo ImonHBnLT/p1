@@ -28,9 +28,9 @@ class MainApp extends StatelessWidget {
       routes: {
         'login': (context) => LoginView(),
         'cadastro': (context) => CadView(),
-        'inicio' : (context) => InitView(),
-        'lista' : (context) => ShoppingListView(),
-        'sobre' : (context) => AbtView(),
+        'inicio': (context) => InitView(),
+        'lista': (context) => ShoppingListView(),
+        'sobre': (context) => AbtView(),
       },
     );
   }
