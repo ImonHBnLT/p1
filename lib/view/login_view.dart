@@ -59,7 +59,7 @@ class _LoginViewState extends State<LoginView> {
                   } else if (double.tryParse(value) == null) {
                     return 'Digite uma senha válida';
                   } else {
-                    if (value != '1234') {
+                    if (value != validatePassword(value)) {
                       return 'Senha incorreta';
                     }
                   }
@@ -133,4 +133,18 @@ bool validateEmail(String email) {
   // Regular expression pattern for a valid email address
   const pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
   return RegExp(pattern).hasMatch(email);
+}
+
+bool validatePassword(String password) {
+  const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
+  const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const digits = '0123456789';
+  const specialCharacters = '!@#\$%^&*()_+[]{}|;:,.<>?';
+
+  bool hasLowerCaseLetter = password.split('').any((char) => lowerCaseLetters.contains(char));
+  bool hasUpperCaseLetter = password.split('').any((char) => upperCaseLetters.contains(char));
+  bool hasDigit = password.split('').any((char) => digits.contains(char));
+  bool hasSpecialCharacter = password.split('').any((char) => specialCharacters.contains(char));
+
+  return hasLowerCaseLetter && hasUpperCaseLetter && hasDigit && hasSpecialCharacter;
 }

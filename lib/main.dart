@@ -3,6 +3,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:p1/view/Init_view.dart';
 import 'package:p1/view/cad_view.dart';
+import 'package:p1/view/shoppinglist_view.dart';
 
 import 'view/login_view.dart';
 
@@ -28,7 +29,7 @@ class MainApp extends StatelessWidget {
         'login': (context) => LoginView(),
         'cadastro': (context) => CadView(),
         'inicio' : (context) => Init(),
-        'lista' : (context) => ListView(),
+        'lista' : (context) => ShoppingListView(),
       },
     );
   }

@@ -3,14 +3,14 @@
 
 import 'package:flutter/material.dart';
 
-class ListView extends StatefulWidget {
-  const ListView({super.key});
+class ShoppingListView extends StatefulWidget {
+  const ShoppingListView({super.key});
 
   @override
-  State<ListView> createState() => _ListViewState();
+  State<ShoppingListView> createState() => _ShoppingListViewState();
 }
 
-class _ListViewState extends State<ListView> {
+class _ShoppingListViewState extends State<ShoppingListView> {
   @override
   Widget build(BuildContext context) {
 

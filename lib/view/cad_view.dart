@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:flutter/services.dart';
+
 class CadView extends StatefulWidget {
   const CadView({super.key});
 
@@ -56,13 +58,14 @@ class _CadViewState extends State<CadView> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     txtSenha = generateRandomString();
+                    Clipboard.setData(ClipboardData(text: txtSenha));
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Senha Gerada com Sucesso! \n $txtSenha'),
                         duration: Duration(seconds: 3),
                         action: 
                           SnackBarAction(
-                            label: 'Voltar para tela inicial',
+                            label: 'Copiar senha e voltar para tela inicial',
                             onPressed: () {
                              Navigator.pop(context, txtSenha);
                             },
