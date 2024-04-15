@@ -11,6 +11,7 @@ class ShoppingListView extends StatefulWidget {
 
 class _ShoppingListViewState extends State<ShoppingListView> {
   Map<String, List<Map<String, dynamic>>> shoppingLists = {};
+  List<Map<String, dynamic>>? searchResults;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,73 @@ class _ShoppingListViewState extends State<ShoppingListView> {
       appBar: AppBar(
         title: Text(listName),
         centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    String searchQuery = '';
+                    return AlertDialog(
+                      title: Text('Buscar Item'),
+                      content: TextField(
+                        onChanged: (value) {
+                          searchQuery = value;
+                        },
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                            child: Text('Buscar'),
+                            onPressed: () {
+                              searchResults = buscarItems(searchQuery);
+                              Navigator.pop(context);
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text('Resultados da Busca'),
+                                    content: SizedBox(
+                                      width: double.maxFinite,
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: searchResults?.length,
+                                        itemBuilder: (context, index) {
+                                          return ListTile(
+                                            title: Text(searchResults?[index]
+                                                    ['nome'] ??
+                                                ''),
+                                            subtitle: Text(searchResults?[index]
+                                                    ['descricao'] ??
+                                                ''),
+                                            trailing: Text(
+                                                'Quantidade: ${searchResults?[index]['quantidade'] ?? ''}'),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text('Fechar'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+          )
+        ],
       ),
       body: ListView.builder(
         itemCount: shoppingLists[listName]?.length ?? 0,
@@ -73,31 +141,21 @@ class _ShoppingListViewState extends State<ShoppingListView> {
                                 controller: quantidadeController,
                                 decoration:
                                     InputDecoration(hintText: 'Quantidade'),
-                                keyboardType: TextInputType.number,
                               ),
                             ],
                           ),
-                          actions: [
+                          actions: <Widget>[
                             TextButton(
                               child: Text('Salvar'),
                               onPressed: () {
                                 setState(() {
-                                  shoppingLists[listName]![index]['nome'] =
-                                      nomeController.text;
-                                  shoppingLists[listName]![index]['descricao'] =
-                                      descricaoController.text;
-                                  shoppingLists[listName]![index]
-                                          ['quantidade'] =
-                                      int.parse(quantidadeController.text);
-                                  Navigator.of(context).pop();
-                                });
-                              },
-                            ),
-                            TextButton(
-                              child: Text('Remover'),
-                              onPressed: () {
-                                setState(() {
-                                  shoppingLists[listName]!.removeAt(index);
+                                  Map<String, dynamic> item =
+                                      shoppingLists[listName]![index];
+                                  alterarNome(item, nomeController.text);
+                                  alterarDescricao(
+                                      item, descricaoController.text);
+                                  alterarQuantidade(item,
+                                      int.parse(quantidadeController.text));
                                   Navigator.of(context).pop();
                                 });
                               },
@@ -166,5 +224,39 @@ class _ShoppingListViewState extends State<ShoppingListView> {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  void alterarNome(Map<String, dynamic> item, String novoNome) {
+    item['nome'] = novoNome;
+  }
+
+  void alterarDescricao(Map<String, dynamic> item, String novaDescricao) {
+    item['descricao'] = novaDescricao;
+  }
+
+  void alterarQuantidade(Map<String, dynamic> item, int novaQuantidade) {
+    item['quantidade'] = novaQuantidade;
+  }
+
+  void marcarComoComprado(Map<String, dynamic> item, bool comprado) {
+    item['comprado'] = comprado;
+  }
+
+  List<Map<String, dynamic>> buscarItems(String query) {
+    List<Map<String, dynamic>> results = [];
+
+    for (var listName in shoppingLists.keys) {
+      var items = shoppingLists[listName];
+      if (items != null) {
+        for (var item in items) {
+          if (item['nome'].toLowerCase().contains(query.toLowerCase()) ||
+              item['descricao'].toLowerCase().contains(query.toLowerCase())) {
+            results.add(item);
+          }
+        }
+      }
+    }
+
+    return results;
   }
 }
