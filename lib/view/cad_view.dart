@@ -14,7 +14,7 @@ class CadView extends StatefulWidget {
 
 var formKey = GlobalKey<FormState>();
 var txtValor1 = TextEditingController();
-String txtSenha = 'a0';
+String txtSenha = '';
 
 class _CadViewState extends State<CadView> {
   @override
