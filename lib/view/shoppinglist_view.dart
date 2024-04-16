@@ -23,7 +23,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
         centerTitle: true,
         actions: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 20.0),
+            padding: const EdgeInsets.only(right: 25.0),
             child: IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
@@ -236,10 +236,6 @@ class _ShoppingListViewState extends State<ShoppingListView> {
 
   void alterarQuantidade(Map<String, dynamic> item, int novaQuantidade) {
     item['quantidade'] = novaQuantidade;
-  }
-
-  void marcarComoComprado(Map<String, dynamic> item, bool comprado) {
-    item['comprado'] = comprado;
   }
 
   List<Map<String, dynamic>> buscarItems(String query) {
