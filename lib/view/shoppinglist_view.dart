@@ -23,7 +23,7 @@ class _ShoppingListViewState extends State<ShoppingListView> {
         centerTitle: true,
         actions: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 25.0),
+            padding: const EdgeInsets.only(right: 22.5),
             child: IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
@@ -145,6 +145,15 @@ class _ShoppingListViewState extends State<ShoppingListView> {
                             ],
                           ),
                           actions: <Widget>[
+                            TextButton(
+                              child: Text('Remover'),
+                              onPressed: () {
+                                setState(() {
+                                  shoppingLists[listName]!.removeAt(index);
+                                });
+                                Navigator.of(context).pop();
+                              },
+                            ),
                             TextButton(
                               child: Text('Salvar'),
                               onPressed: () {
