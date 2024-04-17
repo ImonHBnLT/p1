@@ -26,7 +26,7 @@ class _LoginViewState extends State<LoginView> {
               SizedBox(height: 30),
               TextFormField(
                 controller: txtValor1,
-                style: TextStyle(fontSize: 32),
+                style: TextStyle(fontSize: 21),
                 decoration: InputDecoration(
                   labelText: 'email',
                   border: OutlineInputBorder(),
@@ -46,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
               SizedBox(height: 30),
               TextFormField(
                 controller: txtValor2,
-                style: TextStyle(fontSize: 32),
+                style: TextStyle(fontSize: 21),
                 decoration: InputDecoration(
                   labelText: 'senha',
                   border: OutlineInputBorder(),
